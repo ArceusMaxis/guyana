@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://ck52x0bdlmfmj"]
+
+[ext_resource type="Script" uid="uid://chokkc13yav4g" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://d3vg41f8d65rh" path="res://scenes/test2d.tscn" id="2_bqqt6"]
+
+[node name="Control" type="Control" unique_id=2022405865]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxnf")
+next_scene = ExtResource("2_bqqt6")
+
+[node name="Label" type="Label" parent="." unique_id=2052023993]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.5
+offset_top = -43.5
+offset_right = 274.5
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 63
+text = "GUYANAsandwich"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1245811540]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -92.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 31
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="HBoxContainer" unique_id=1046744384]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 55)
+layout_mode = 2
+text = "PLAY"
+
+[node name="CreditsButton" type="Button" parent="HBoxContainer" unique_id=319498223]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 55)
+layout_mode = 2
+text = "CREDITS"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer" unique_id=1004632785]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 55)
+layout_mode = 2
+text = "QUIT"
+
+[node name="Credits" type="Control" parent="." unique_id=1223475019]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Credits" unique_id=1072096688]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.19076231, 0.19076234, 0.19076231, 1)
+
+[node name="Label" type="Label" parent="Credits" unique_id=1487946771]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -222.0
+offset_right = 133.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 63
+text = "Credits"
+
+[node name="backbutton" type="Button" parent="Credits" unique_id=531766007]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 760.0
+offset_top = 400.0
+offset_right = 896.0
+offset_bottom = 481.0
+theme_override_font_sizes/font_size = 53
+text = "Back"

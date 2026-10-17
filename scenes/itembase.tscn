@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cf3niieok1nv3"]
+
+[ext_resource type="Script" uid="uid://btxmdpnnm8tuo" path="res://scripts/item.gd" id="1_fv4ye"]
+[ext_resource type="Texture2D" uid="uid://bdnt0hgdy2mmm" path="res://textures/oldmine.png" id="2_m8ohe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_318gt"]
+radius = 25.298222
+
+[node name="Item" type="Area2D" unique_id=410368887]
+script = ExtResource("1_fv4ye")
+item_id = "oldmine"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=581678987]
+texture = ExtResource("2_m8ohe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=12550328]
+shape = SubResource("CircleShape2D_318gt")

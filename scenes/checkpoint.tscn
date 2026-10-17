@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ds8yfl6l4ceip"]
+
+[ext_resource type="Script" uid="uid://bg1jdi1yy1y18" path="res://scripts/checkpoint.gd" id="1_ywqth"]
+[ext_resource type="Texture2D" uid="uid://ebupill062kg" path="res://textures/checkpoints.png" id="2_vsimk"]
+
+[sub_resource type="Curve" id="Curve_318gt"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_318gt"]
+size = Vector2(128, 150)
+
+[node name="Checkpoint" type="Area2D" unique_id=210490658]
+script = ExtResource("1_ywqth")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1487436120]
+position = Vector2(0, 144)
+amount = 16
+emission_shape = 3
+emission_rect_extents = Vector2(48, 1)
+gravity = Vector2(0, -980)
+radial_accel_min = -100.0
+scale_amount_curve = SubResource("Curve_318gt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1143610876]
+position = Vector2(0, 75)
+shape = SubResource("RectangleShape2D_318gt")
+
+[node name="Checkpoints" type="Sprite2D" parent="." unique_id=423967496]
+position = Vector2(0, -72)
+texture = ExtResource("2_vsimk")

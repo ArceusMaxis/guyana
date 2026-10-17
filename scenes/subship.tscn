@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://dbhrivwtxuo2h"]
+
+[ext_resource type="Script" uid="uid://c7yekw1xoh8a2" path="res://scripts/sub2d.gd" id="1_88klh"]
+[ext_resource type="Texture2D" uid="uid://c3o3xjdcm6isc" path="res://textures/sub2d.png" id="2_l0iaw"]
+[ext_resource type="Texture2D" uid="uid://birl7sohdt2hb" path="res://textures/claw.png" id="3_mjtt7"]
+[ext_resource type="Texture2D" uid="uid://bdnt0hgdy2mmm" path="res://textures/oldmine.png" id="4_j33nr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo20s"]
+atlas = ExtResource("2_l0iaw")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5apra"]
+atlas = ExtResource("2_l0iaw")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_318gt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo20s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5apra")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_318gt"]
+radius = 24.0
+height = 80.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_318gt"]
+size = Vector2(40, 64)
+
+[sub_resource type="Animation" id="Animation_5apra"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flipnode/Claw:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.46505377, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("flipnode/Claw:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32.000004, 24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("flipnode/Claw:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_p6y7h"]
+resource_name = "drop"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flipnode/Claw:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.3228859, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_o73sm"]
+resource_name = "pickup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flipnode/Claw:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.008333334, 0, 0.57, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.46505377, 0.5), Vector2(0.46505377, 0.5), Vector2(0.70564514, 0.5), Vector2(0.46505377, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("flipnode/Claw:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.008333334, 0, 0.57, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(32.000004, 24), Vector2(32.000004, 24), Vector2(54.375004, 24), Vector2(32.000004, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_78rhj"]
+_data = {
+&"RESET": SubResource("Animation_5apra"),
+&"drop": SubResource("Animation_p6y7h"),
+&"pickup": SubResource("Animation_o73sm")
+}
+
+[node name="Ship" type="CharacterBody2D" unique_id=1365197171 groups=["player"]]
+script = ExtResource("1_88klh")
+thrust_speed = 800.0
+max_speed = 200.0
+friction = 0.98
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1534982751]
+scale = Vector2(0.375, 0.375)
+sprite_frames = SubResource("SpriteFrames_318gt")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695989082]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_318gt")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=72444264]
+
+[node name="flipnode" type="Marker2D" parent="." unique_id=677726236]
+
+[node name="Claw" type="Sprite2D" parent="flipnode" unique_id=705379457]
+position = Vector2(32.000004, 24)
+scale = Vector2(0.46505377, 0.5)
+texture = ExtResource("3_mjtt7")
+
+[node name="GrabArea" type="Area2D" parent="flipnode" unique_id=1561939041]
+position = Vector2(16, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flipnode/GrabArea" unique_id=432344656]
+position = Vector2(84, 24)
+shape = SubResource("RectangleShape2D_318gt")
+
+[node name="GrabPin" type="Marker2D" parent="flipnode" unique_id=1129250413]
+position = Vector2(80, 24)
+
+[node name="oldmine" type="Sprite2D" parent="flipnode/GrabPin" unique_id=1095269812]
+visible = false
+texture = ExtResource("4_j33nr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2034815550]
+libraries/ = SubResource("AnimationLibrary_78rhj")
+
+[node name="Control" type="Control" parent="." unique_id=207552457]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -480.0
+offset_top = -272.0
+offset_right = 480.0
+offset_bottom = 272.0
+
+[node name="Coinlabel" type="Label" parent="Control" unique_id=850107245]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 16.0
+offset_right = -32.0
+offset_bottom = 40.0
+grow_horizontal = 0
+text = "Coins: 0"
+horizontal_alignment = 2
