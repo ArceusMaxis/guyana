@@ -30,20 +30,20 @@ func _physics_process(delta: float) -> void:
 	input_vector.x = Input.get_axis("left", "right")
 	input_vector.y = Input.get_axis("up", "down")
 
-	if input_vector.length() > 0:
-		input_vector = input_vector.normalized()
-		velocity += input_vector * thrust_speed * delta
-		velocity = velocity.limit_length(max_speed)
+	if not is_animating:
+		if input_vector.length() > 0:
+			input_vector = input_vector.normalized()
+			velocity += input_vector * thrust_speed * delta
+			velocity = velocity.limit_length(max_speed)
 
-		if not is_animating:
 			if input_vector.x > 0:
 				sprite.flip_h = false
 				flipnode.scale.x = 1
 			elif input_vector.x < 0:
 				sprite.flip_h = true
 				flipnode.scale.x = -1
-	else:
-		velocity = velocity.lerp(Vector2.ZERO, 1.0 - pow(friction, delta * 60))
+		else:
+			velocity = velocity.lerp(Vector2.ZERO, 1.0 - pow(friction, delta * 60))
 
 	if Input.is_action_just_pressed("grab"):
 		_toggle_grab()

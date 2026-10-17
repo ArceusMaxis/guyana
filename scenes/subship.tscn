@@ -1,26 +1,38 @@
 [gd_scene format=3 uid="uid://dbhrivwtxuo2h"]
 
 [ext_resource type="Script" uid="uid://c7yekw1xoh8a2" path="res://scripts/sub2d.gd" id="1_88klh"]
-[ext_resource type="Texture2D" uid="uid://c3o3xjdcm6isc" path="res://textures/sub2d.png" id="2_l0iaw"]
-[ext_resource type="Texture2D" uid="uid://birl7sohdt2hb" path="res://textures/claw.png" id="3_mjtt7"]
+[ext_resource type="Texture2D" uid="uid://c33uhlxhiqqer" path="res://textures/bubble.png" id="2_j33nr"]
+[ext_resource type="Texture2D" uid="uid://dshlob4lhlkqu" path="res://textures/submarine_part_1.png" id="2_mjtt7"]
 [ext_resource type="Texture2D" uid="uid://bdnt0hgdy2mmm" path="res://textures/oldmine.png" id="4_j33nr"]
+[ext_resource type="Texture2D" uid="uid://dmfgtbb676ier" path="res://textures/submarine_part_2.png" id="4_yrtbm"]
+[ext_resource type="Shader" uid="uid://d3vmes2vx17pk" path="res://scripts/tint_shader.gdshader" id="5_l0iaw"]
+[ext_resource type="Shader" uid="uid://b10igr3bwfe23" path="res://scenes/godrays.gdshader" id="6_mjtt7"]
+[ext_resource type="Texture2D" uid="uid://cgtpey7opdnpv" path="res://textures/submarine_part_3.png" id="7_yrtbm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mo20s"]
-atlas = ExtResource("2_l0iaw")
-region = Rect2(0, 0, 256, 256)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_318gt"]
+shader = ExtResource("6_mjtt7")
+shader_parameter/angle = 0.29
+shader_parameter/position = Vector2(0.25, 0.5)
+shader_parameter/spread = 0.2030000096425
+shader_parameter/cutoff = 0.0340000491150001
+shader_parameter/falloff = 0.522000024795
+shader_parameter/edge_fade = 0.46800002223
+shader_parameter/speed = 1.175
+shader_parameter/ray1_density = 0.0
+shader_parameter/ray2_density = 27.88
+shader_parameter/ray2_intensity = 0.366000017385
+shader_parameter/color = Color(1, 1, 1, 0.8)
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5apra"]
-atlas = ExtResource("2_l0iaw")
-region = Rect2(256, 0, 256, 256)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_318gt"]
+size = Vector2(40, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_318gt"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mo20s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5apra")
+"texture": ExtResource("2_mjtt7")
 }],
 "loop": 1,
 "name": &"default",
@@ -28,11 +40,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_318gt"]
-radius = 24.0
-height = 80.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_318gt"]
-size = Vector2(40, 64)
+radius = 28.65
+height = 128.0
 
 [sub_resource type="Animation" id="Animation_5apra"]
 length = 0.001
@@ -46,7 +55,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.46505377, 0.5)]
+"values": [Vector2(0.072, 0.0774104)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -58,35 +67,23 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(32.000004, 24)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("flipnode/Claw:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"values": [Vector2(16.000004, 8.000002)]
 }
 
 [sub_resource type="Animation" id="Animation_p6y7h"]
 resource_name = "drop"
-length = 0.5
+length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("flipnode/Claw:rotation")
+tracks/0/path = NodePath("flipnode/Claw:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.22, 0.5),
+"times": PackedFloat32Array(0, 0.118078396, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.3228859, 0.0]
+"values": [Vector2(16.000004, 8.000002), Vector2(8, 8), Vector2(16.000004, 8.000002)]
 }
 
 [sub_resource type="Animation" id="Animation_o73sm"]
@@ -98,10 +95,10 @@ tracks/0/path = NodePath("flipnode/Claw:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.008333334, 0, 0.57, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.55, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.46505377, 0.5), Vector2(0.46505377, 0.5), Vector2(0.70564514, 0.5), Vector2(0.46505377, 0.5)]
+"values": [Vector2(0.072, 0.0774104), Vector2(0.12000001, 0.0774104), Vector2(0.072, 0.0774104)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -110,10 +107,10 @@ tracks/1/path = NodePath("flipnode/Claw:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(-0.008333334, 0, 0.57, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.55, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(32.000004, 24), Vector2(32.000004, 24), Vector2(54.375004, 24), Vector2(32.000004, 24)]
+"values": [Vector2(16.000004, 8.000002), Vector2(7.6293945e-06, 8.000002), Vector2(16.000004, 8.000002)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_78rhj"]
@@ -123,29 +120,42 @@ _data = {
 &"pickup": SubResource("Animation_o73sm")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjtt7"]
+shader = ExtResource("5_l0iaw")
+shader_parameter/tint_color = Color(0.007438788, 0.52425444, 0, 1)
+shader_parameter/blend_amount = 0.800000038
+
 [node name="Ship" type="CharacterBody2D" unique_id=1365197171 groups=["player"]]
 script = ExtResource("1_88klh")
 thrust_speed = 800.0
 max_speed = 200.0
 friction = 0.98
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1534982751]
-scale = Vector2(0.375, 0.375)
-sprite_frames = SubResource("SpriteFrames_318gt")
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695989082]
-rotation = -1.5707964
-shape = SubResource("CapsuleShape2D_318gt")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=72444264]
-
 [node name="flipnode" type="Marker2D" parent="." unique_id=677726236]
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="flipnode" unique_id=1656590288]
+position = Vector2(-104, -8)
+amount = 60
+texture = ExtResource("2_j33nr")
+emission_shape = 3
+emission_rect_extents = Vector2(9.285, 6.73)
+gravity = Vector2(0, -980)
+scale_amount_min = 0.05
+scale_amount_max = 0.2
+
+[node name="fakelight" type="ColorRect" parent="flipnode" unique_id=1172390606]
+z_index = 1
+material = SubResource("ShaderMaterial_318gt")
+offset_left = 45.09629
+offset_top = 8.004595
+offset_right = 108.49993
+offset_bottom = 395.9852
+rotation = -1.5723786
+
 [node name="Claw" type="Sprite2D" parent="flipnode" unique_id=705379457]
-position = Vector2(32.000004, 24)
-scale = Vector2(0.46505377, 0.5)
-texture = ExtResource("3_mjtt7")
+position = Vector2(16.000004, 8.000002)
+scale = Vector2(0.072, 0.0774104)
+texture = ExtResource("4_yrtbm")
 
 [node name="GrabArea" type="Area2D" parent="flipnode" unique_id=1561939041]
 position = Vector2(16, 0)
@@ -161,15 +171,33 @@ position = Vector2(80, 24)
 visible = false
 texture = ExtResource("4_j33nr")
 
+[node name="SubmarinePart3" type="Sprite2D" parent="flipnode" unique_id=1738458247]
+z_index = 1
+position = Vector2(3.8146973e-06, 1.9073486e-06)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("7_yrtbm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1534982751]
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_318gt")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695989082]
+position = Vector2(-8, -2.78)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_318gt")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=72444264]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2034815550]
 libraries/ = SubResource("AnimationLibrary_78rhj")
 
 [node name="Control" type="Control" parent="." unique_id=207552457]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -480.0
+offset_left = -504.0
 offset_top = -272.0
-offset_right = 480.0
+offset_right = 456.0
 offset_bottom = 272.0
 
 [node name="Coinlabel" type="Label" parent="Control" unique_id=850107245]
@@ -184,3 +212,18 @@ offset_bottom = 40.0
 grow_horizontal = 0
 text = "Coins: 0"
 horizontal_alignment = 2
+
+[node name="HueLayer" type="CanvasLayer" parent="." unique_id=255050449]
+layer = 100
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="HueLayer" unique_id=237898818]
+material = SubResource("ShaderMaterial_mjtt7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=262899531]
+color = Color(0.9693503, 0.51869804, 0.48519582, 1)
