@@ -8,6 +8,7 @@
 [node name="Node2D" type="Node2D" unique_id=212175431]
 
 [node name="Testbg" type="Sprite2D" parent="." unique_id=1180709907]
+z_index = -5
 position = Vector2(1116, 444)
 scale = Vector2(4.359375, 3.46875)
 texture = ExtResource("1_8c76e")

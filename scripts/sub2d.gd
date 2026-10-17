@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var flipnode: Marker2D = $flipnode
 @onready var claw_anim: AnimationPlayer = $AnimationPlayer
 @onready var coinlabel: Label = $Control/Coinlabel
+@onready var colli: CollisionShape2D = $CollisionShape2D
 
 var nearby_items: Array[Area2D] = []
 var grabbed_item: Area2D = null
@@ -39,9 +40,11 @@ func _physics_process(delta: float) -> void:
 			if input_vector.x > 0:
 				sprite.flip_h = false
 				flipnode.scale.x = 1
+				colli.position.x = -8
 			elif input_vector.x < 0:
 				sprite.flip_h = true
 				flipnode.scale.x = -1
+				colli.position.x = 8
 		else:
 			velocity = velocity.lerp(Vector2.ZERO, 1.0 - pow(friction, delta * 60))
 
