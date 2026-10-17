@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://p0gm7rfk3pai" path="res://textures/submarine_claw_top.png" id="3_qvn8w"]
 [ext_resource type="Texture2D" uid="uid://bdnt0hgdy2mmm" path="res://textures/oldmine.png" id="4_j33nr"]
 [ext_resource type="Texture2D" uid="uid://cxwufvxoyfmtu" path="res://textures/submarine_claw_bottom.png" id="4_y5eat"]
-[ext_resource type="Shader" uid="uid://b10igr3bwfe23" path="res://scenes/godrays.gdshader" id="6_mjtt7"]
+[ext_resource type="Shader" uid="uid://b10igr3bwfe23" path="res://scripts/godrays.gdshader" id="6_mjtt7"]
 [ext_resource type="Texture2D" uid="uid://cgtpey7opdnpv" path="res://textures/submarine_part_3.png" id="7_yrtbm"]
 [ext_resource type="Texture2D" uid="uid://npym7mnbm0mj" path="res://textures/bubbles.png" id="10_fhyat"]
 
@@ -157,6 +157,9 @@ _data = {
 &"drop": SubResource("Animation_p6y7h"),
 &"pickup": SubResource("Animation_o73sm")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_318gt"]
+radius = 1080.0
 
 [node name="Ship" type="CharacterBody2D" unique_id=1365197171 groups=["player"]]
 scale = Vector2(2, 2)
@@ -312,3 +315,8 @@ horizontal_alignment = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=262899531]
 color = Color(0, 0.9916915, 0.48586094, 1)
+
+[node name="DetectArea" type="Area2D" parent="." unique_id=1091210469]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea" unique_id=503032081]
+shape = SubResource("CircleShape2D_318gt")

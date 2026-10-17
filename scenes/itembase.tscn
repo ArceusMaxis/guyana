@@ -2,6 +2,21 @@
 
 [ext_resource type="Script" uid="uid://btxmdpnnm8tuo" path="res://scripts/item.gd" id="1_fv4ye"]
 [ext_resource type="Texture2D" uid="uid://bdnt0hgdy2mmm" path="res://textures/oldmine.png" id="2_m8ohe"]
+[ext_resource type="Texture2D" uid="uid://vfbhebhloivj" path="res://textures/sparkles.png" id="2_t7xb1"]
+[ext_resource type="Shader" uid="uid://q0n05agted27" path="res://scripts/highlight.gdshader" id="3_m8ohe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t7xb1"]
+shader = ExtResource("3_m8ohe")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.1410000066975
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_318gt"]
 radius = 25.298222
@@ -10,8 +25,30 @@ radius = 25.298222
 script = ExtResource("1_fv4ye")
 item_id = "oldmine"
 
+[node name="RevealParticles" type="CPUParticles2D" parent="." unique_id=536076596]
+emitting = false
+amount = 15
+texture = ExtResource("2_t7xb1")
+one_shot = true
+explosiveness = 1.0
+gravity = Vector2(0, -100)
+radial_accel_min = -100.0
+radial_accel_max = 100.0
+tangential_accel_min = -100.0
+tangential_accel_max = 100.0
+scale_amount_min = 0.2
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=581678987]
+clip_children = 2
 texture = ExtResource("2_m8ohe")
+
+[node name="highlight" type="ColorRect" parent="Sprite2D" unique_id=1625392461]
+visible = false
+material = SubResource("ShaderMaterial_t7xb1")
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=12550328]
 shape = SubResource("CircleShape2D_318gt")

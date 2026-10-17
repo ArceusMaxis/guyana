@@ -4,6 +4,21 @@
 [ext_resource type="PackedScene" uid="uid://dbhrivwtxuo2h" path="res://scenes/subship.tscn" id="2_e2ll7"]
 [ext_resource type="PackedScene" uid="uid://cf3niieok1nv3" path="res://scenes/itembase.tscn" id="3_1ov6r"]
 [ext_resource type="PackedScene" uid="uid://ds8yfl6l4ceip" path="res://scenes/checkpoint.tscn" id="4_y38rh"]
+[ext_resource type="Shader" uid="uid://b7q5h52yx2vtm" path="res://scripts/underwater.gdshader" id="5_y38rh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_318gt"]
+shader = ExtResource("5_y38rh")
+shader_parameter/distortion_strength = 0.0010000000475
+shader_parameter/distortion_speed = 1.0000000475
+shader_parameter/distortion_frequency = 50.0
+shader_parameter/tint_color = Color(0.1, 0.4, 0.5, 1)
+shader_parameter/tint_strength = 0.0
+shader_parameter/vignette_strength = 0.90000004275
+shader_parameter/vignette_radius = 0.6750000320625
+shader_parameter/enable_caustics = false
+shader_parameter/caustic_strength = 0.15
+shader_parameter/caustic_scale = 6.0
+shader_parameter/caustic_speed = 0.5
 
 [node name="Node2D" type="Node2D" unique_id=212175431]
 
@@ -30,3 +45,13 @@ position = Vector2(48, 568)
 
 [node name="Checkpoint" parent="." unique_id=210490658 instance=ExtResource("4_y38rh")]
 position = Vector2(1792, 264)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2084252347]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1835105593]
+material = SubResource("ShaderMaterial_318gt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -13,14 +13,20 @@ extends CharacterBody2D
 @onready var claw_anim: AnimationPlayer = $AnimationPlayer
 @onready var coinlabel: Label = $Control/Coinlabel
 @onready var colli: CollisionShape2D = $CollisionShape2D
+@onready var detect_area: Area2D = $DetectArea
 
 var nearby_items: Array[Area2D] = []
 var grabbed_item: Area2D = null
 var is_animating: bool = false
 
+var items_in_detect_range: Array[Area2D] = []
+
 func _ready() -> void:
 	grab_area.area_entered.connect(_on_grab_area_entered)
 	grab_area.area_exited.connect(_on_grab_area_exited)
+
+	detect_area.area_entered.connect(_on_detect_area_entered)
+	detect_area.area_exited.connect(_on_detect_area_exited)
 
 	for child in grab_pin.get_children():
 		child.visible = false
@@ -50,6 +56,9 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("grab"):
 		_toggle_grab()
+
+	if Input.is_action_just_pressed("horn"):
+		_trigger_horn()
 
 	move_and_slide()
 
@@ -113,3 +122,17 @@ func sell_grabbed_item() -> void:
 
 	for child in grab_pin.get_children():
 		child.visible = false
+
+func _on_detect_area_entered(area: Area2D) -> void:
+	if area is Item and not items_in_detect_range.has(area):
+		items_in_detect_range.append(area)
+
+func _on_detect_area_exited(area: Area2D) -> void:
+	items_in_detect_range.erase(area)
+
+func _trigger_horn() -> void:
+	for item in items_in_detect_range.duplicate():
+		if is_instance_valid(item) and item.has_method("reveal"):
+			item.reveal()
+		else:
+			items_in_detect_range.erase(item)

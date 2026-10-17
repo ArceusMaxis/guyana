@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvfsg6tr7nqkd"
+path="res://.godot/imported/Cryptic Sorrow.mp3-b21929b7bd02c5d4193410dde909b949.mp3str"
+
+[deps]
+
+source_file="res://audio/Cryptic Sorrow.mp3"
+dest_files=["res://.godot/imported/Cryptic Sorrow.mp3-b21929b7bd02c5d4193410dde909b949.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
