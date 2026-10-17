@@ -7,9 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://p0gm7rfk3pai" path="res://textures/submarine_claw_top.png" id="3_qvn8w"]
 [ext_resource type="Texture2D" uid="uid://bdnt0hgdy2mmm" path="res://textures/oldmine.png" id="4_j33nr"]
 [ext_resource type="Texture2D" uid="uid://cxwufvxoyfmtu" path="res://textures/submarine_claw_bottom.png" id="4_y5eat"]
+[ext_resource type="Shader" uid="uid://b7q5h52yx2vtm" path="res://scripts/underwater.gdshader" id="5_l0iaw"]
 [ext_resource type="Shader" uid="uid://b10igr3bwfe23" path="res://scripts/godrays.gdshader" id="6_mjtt7"]
 [ext_resource type="Texture2D" uid="uid://cgtpey7opdnpv" path="res://textures/submarine_part_3.png" id="7_yrtbm"]
 [ext_resource type="Texture2D" uid="uid://npym7mnbm0mj" path="res://textures/bubbles.png" id="10_fhyat"]
+[ext_resource type="Texture2D" uid="uid://dwi5yfprygue1" path="res://textures/ui_1.png" id="11_6k77r"]
+[ext_resource type="FontFile" uid="uid://2tkrtqjfw1wu" path="res://Trattatello-Font.ttf" id="11_y5eat"]
+[ext_resource type="Script" uid="uid://cqoaaalx4a4hy" path="res://scenes/modulate_matcher.gd" id="12_mav5b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_318gt"]
+radius = 1080.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_318gt"]
 radius = 28.65
@@ -158,8 +165,22 @@ _data = {
 &"pickup": SubResource("Animation_o73sm")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_318gt"]
-radius = 1080.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvn8w"]
+shader = ExtResource("5_l0iaw")
+shader_parameter/distortion_strength = 0.0010000000475
+shader_parameter/distortion_speed = 1.0000000475
+shader_parameter/distortion_frequency = 50.0
+shader_parameter/tint_color = Color(0.1, 0.4, 0.5, 1)
+shader_parameter/tint_strength = 0.0
+shader_parameter/vignette_strength = 0.90000004275
+shader_parameter/vignette_radius = 0.6750000320625
+shader_parameter/enable_caustics = false
+shader_parameter/caustic_strength = 0.15
+shader_parameter/caustic_scale = 6.0
+shader_parameter/caustic_speed = 0.5
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y5eat"]
+light_mode = 1
 
 [node name="Ship" type="CharacterBody2D" unique_id=1365197171 groups=["player"]]
 scale = Vector2(2, 2)
@@ -167,6 +188,11 @@ script = ExtResource("1_88klh")
 thrust_speed = 800.0
 max_speed = 200.0
 friction = 0.98
+
+[node name="DetectArea" type="Area2D" parent="." unique_id=1091210469]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea" unique_id=503032081]
+shape = SubResource("CircleShape2D_318gt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695989082]
 position = Vector2(-8, -2.78)
@@ -292,15 +318,34 @@ scale_amount_max = 0.3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2034815550]
 libraries/ = SubResource("AnimationLibrary_78rhj")
 
-[node name="Control" type="Control" parent="." unique_id=207552457]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=784196742]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1810711332]
+modulate = Color(0, 0.9916915, 0.48586094, 1)
+material = SubResource("ShaderMaterial_qvn8w")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=262899531]
+color = Color(0, 0.9916915, 0.48586094, 1)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1389623362]
+
+[node name="Control" type="Control" parent="CanvasLayer2" unique_id=207552457]
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
-offset_left = -504.0
-offset_top = -272.0
-offset_right = 456.0
-offset_bottom = 272.0
+offset_right = 960.0
+offset_bottom = 544.0
+scale = Vector2(2, 2)
+script = ExtResource("12_mav5b")
 
-[node name="Coinlabel" type="Label" parent="Control" unique_id=850107245]
+[node name="Coinlabel" type="Label" parent="CanvasLayer2/Control" unique_id=850107245]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_y5eat")
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -310,13 +355,15 @@ offset_top = 16.0
 offset_right = -32.0
 offset_bottom = 40.0
 grow_horizontal = 0
+theme_override_fonts/font = ExtResource("11_y5eat")
+theme_override_font_sizes/font_size = 37
 text = "Coins: 0"
 horizontal_alignment = 2
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=262899531]
-color = Color(0, 0.9916915, 0.48586094, 1)
-
-[node name="DetectArea" type="Area2D" parent="." unique_id=1091210469]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea" unique_id=503032081]
-shape = SubResource("CircleShape2D_318gt")
+[node name="ControlsInfo" type="TextureRect" parent="CanvasLayer2/Control" unique_id=1580128274]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_y5eat")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("11_6k77r")

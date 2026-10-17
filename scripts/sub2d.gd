@@ -11,9 +11,10 @@ extends CharacterBody2D
 @onready var grab_pin: Marker2D = $flipnode/GrabPin
 @onready var flipnode: Marker2D = $flipnode
 @onready var claw_anim: AnimationPlayer = $AnimationPlayer
-@onready var coinlabel: Label = $Control/Coinlabel
+@onready var coinlabel: Label = %Coinlabel
 @onready var colli: CollisionShape2D = $CollisionShape2D
 @onready var detect_area: Area2D = $DetectArea
+@onready var controls_info: TextureRect = %ControlsInfo
 
 var nearby_items: Array[Area2D] = []
 var grabbed_item: Area2D = null
@@ -30,6 +31,9 @@ func _ready() -> void:
 
 	for child in grab_pin.get_children():
 		child.visible = false
+		
+	await get_tree().create_timer(2).timeout
+	controls_info.visible = false
 
 func _physics_process(delta: float) -> void:
 	coinlabel.text = "Coins: " + str(coins)
