@@ -3,6 +3,28 @@
 [ext_resource type="Script" uid="uid://chokkc13yav4g" path="res://scripts/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://d3vg41f8d65rh" path="res://scenes/test2d.tscn" id="2_bqqt6"]
 [ext_resource type="AudioStream" uid="uid://cvfsg6tr7nqkd" path="res://audio/Cryptic Sorrow.mp3" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://bdonjl5tqdptj" path="res://textures/Screenshot_2026-10-17_at_9.56.17_PM.png" id="3_rtw2f"]
+[ext_resource type="FontFile" uid="uid://2tkrtqjfw1wu" path="res://Trattatello-Font.ttf" id="4_oa1go"]
+[ext_resource type="FontFile" uid="uid://cussd4ngnyl7a" path="res://Verdana Regular.ttf" id="5_tbmy8"]
+[ext_resource type="Shader" uid="uid://b7q5h52yx2vtm" path="res://scripts/underwater.gdshader" id="7_oa1go"]
+[ext_resource type="Texture2D" uid="uid://npym7mnbm0mj" path="res://textures/bubbles.png" id="8_tbmy8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wbad"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
+shader = ExtResource("7_oa1go")
+shader_parameter/distortion_strength = 0.0010000000475
+shader_parameter/distortion_speed = 1.0000000475
+shader_parameter/distortion_frequency = 50.0
+shader_parameter/tint_color = Color(0.1, 0.4, 0.5, 1)
+shader_parameter/tint_strength = 0.0
+shader_parameter/vignette_strength = 0.90000004275
+shader_parameter/vignette_radius = 0.6750000320625
+shader_parameter/enable_caustics = false
+shader_parameter/caustic_strength = 0.15
+shader_parameter/caustic_scale = 6.0
+shader_parameter/caustic_speed = 0.5
 
 [node name="Control" type="Control" unique_id=2022405865]
 layout_mode = 3
@@ -14,6 +36,11 @@ grow_vertical = 2
 script = ExtResource("1_ekxnf")
 next_scene = ExtResource("2_bqqt6")
 
+[node name="Screenshot20261017At9_56_17Pm" type="Sprite2D" parent="." unique_id=1800221713]
+position = Vector2(960, 540)
+scale = Vector2(0.65753424, 0.6451613)
+texture = ExtResource("3_rtw2f")
+
 [node name="Label" type="Label" parent="." unique_id=2052023993]
 layout_mode = 1
 anchors_preset = 8
@@ -21,45 +48,78 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -274.5
-offset_top = -43.5
-offset_right = 274.5
-offset_bottom = 43.5
+offset_left = -757.0
+offset_top = -500.0
+offset_right = 74.0
+offset_bottom = -216.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 63
-text = "GUYANAsandwich"
+theme_override_fonts/font = ExtResource("4_oa1go")
+theme_override_font_sizes/font_size = 156
+text = "game title"
+uppercase = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1245811540]
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=258625718]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -92.0
-offset_bottom = -28.0
+offset_left = 192.0
+offset_top = -812.0
+offset_right = -1464.0
+offset_bottom = -516.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 31
-alignment = 1
+theme_override_constants/separation = 4
 
 [node name="PlayButton" type="Button" parent="HBoxContainer" unique_id=1046744384]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 55)
 layout_mode = 2
-text = "PLAY"
+theme_override_colors/font_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
+theme_override_colors/font_pressed_color = Color(0.56, 0.56, 0.56, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_tbmy8")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3wbad")
+text = "Play"
+alignment = 0
 
 [node name="CreditsButton" type="Button" parent="HBoxContainer" unique_id=319498223]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 55)
 layout_mode = 2
-text = "CREDITS"
+theme_override_colors/font_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
+theme_override_colors/font_pressed_color = Color(0.56, 0.56, 0.56, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_tbmy8")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3wbad")
+text = "Credits"
+alignment = 0
 
 [node name="QuitButton" type="Button" parent="HBoxContainer" unique_id=1004632785]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 55)
 layout_mode = 2
-text = "QUIT"
+theme_override_colors/font_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
+theme_override_colors/font_pressed_color = Color(0.56, 0.56, 0.56, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_tbmy8")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3wbad")
+text = "Quit"
+alignment = 0
 
 [node name="Credits" type="Control" parent="." unique_id=1223475019]
 unique_name_in_owner = true
@@ -82,36 +142,43 @@ color = Color(0.19076231, 0.19076234, 0.19076231, 1)
 
 [node name="Label" type="Label" parent="Credits" unique_id=1487946771]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -768.0
-offset_top = -412.0
-offset_right = -219.0
-offset_bottom = -325.0
+offset_left = -272.0
+offset_top = 72.0
+offset_right = 277.0
+offset_bottom = 281.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_font_sizes/font_size = 153
 text = "Credits"
 
-[node name="backbutton" type="Button" parent="Credits" unique_id=531766007]
+[node name="backbutton" type="Button" parent="Credits" unique_id=1687898835]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -184.0
-offset_right = -96.0
-offset_bottom = -79.0
-grow_horizontal = 0
+offset_left = -80.0
+offset_top = -144.0
+offset_right = 81.0
+offset_bottom = -61.0
+grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 53
+theme_override_colors/font_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
+theme_override_colors/font_pressed_color = Color(0.56, 0.56, 0.56, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_tbmy8")
+theme_override_font_sizes/font_size = 67
+theme_override_styles/normal = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_3wbad")
+theme_override_styles/focus = SubResource("StyleBoxFlat_3wbad")
 text = "Back"
+alignment = 0
 
 [node name="HBoxContainer" type="GridContainer" parent="Credits" unique_id=680090170]
 layout_mode = 1
@@ -255,7 +322,53 @@ text = "Music"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="Credits" unique_id=619503601]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -657.0
+offset_top = -256.0
+offset_right = 660.0
+offset_bottom = -185.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "\"Cryptic Sorrow\" Kevin MacLeod (incompetech.com) Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=860908379]
 stream = ExtResource("3_bqqt6")
 autoplay = true
 bus = &"Music"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=635053074]
+color = Color(0, 0.9916915, 0.48586094, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1045764032]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1812540698]
+material = SubResource("ShaderMaterial_tbmy8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=101919754]
+position = Vector2(960, 1216)
+amount = 1
+texture = ExtResource("8_tbmy8")
+lifetime = 5.0
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(960, 1)
+gravity = Vector2(0, -980)
+scale_amount_min = 0.1
+scale_amount_max = 0.3
