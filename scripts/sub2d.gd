@@ -6,6 +6,14 @@ extends CharacterBody2D
 @export var max_speed: float = 400.0
 @export var friction: float = 0.95
 
+@export var depth_colors: Array[DepthColorPoint] = []
+@export var color_transition_speed: float = 2.0
+@export var surface_y: float = 0.0
+
+@export var motor_volume_db: float = 0.0
+@export var motor_silent_db: float = -40.0
+@export var volume_fade_speed: float = 5.0
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var grab_area: Area2D = $flipnode/GrabArea
 @onready var grab_pin: Marker2D = $flipnode/GrabPin
@@ -15,12 +23,16 @@ extends CharacterBody2D
 @onready var colli: CollisionShape2D = $CollisionShape2D
 @onready var detect_area: Area2D = $DetectArea
 @onready var controls_info: TextureRect = %ControlsInfo
+@onready var canvas_modulate: CanvasModulate = $CanvasModulate
+@onready var motor_noise: AudioStreamPlayer = $MotorNoise
 
 var nearby_items: Array[Area2D] = []
 var grabbed_item: Area2D = null
 var is_animating: bool = false
 
 var items_in_detect_range: Array[Area2D] = []
+
+var _sorted_depth_colors: Array[DepthColorPoint] = []
 
 func _ready() -> void:
 	grab_area.area_entered.connect(_on_grab_area_entered)
@@ -31,8 +43,11 @@ func _ready() -> void:
 
 	for child in grab_pin.get_children():
 		child.visible = false
-		
-	await get_tree().create_timer(2).timeout
+
+	_sorted_depth_colors = depth_colors.duplicate()
+	_sorted_depth_colors.sort_custom(func(a, b): return a.depth < b.depth)
+
+	await get_tree().create_timer(25).timeout
 	controls_info.visible = false
 
 func _physics_process(delta: float) -> void:
@@ -64,7 +79,45 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("horn"):
 		_trigger_horn()
 
+	_update_depth_color(delta)
+
 	move_and_slide()
+	_update_motor_sound(delta)
+
+func _get_current_depth() -> float:
+	return max(0.0, global_position.y - surface_y)
+
+func _get_target_color_for_depth(depth: float) -> Color:
+	if _sorted_depth_colors.is_empty():
+		return Color.WHITE
+
+	if _sorted_depth_colors.size() == 1:
+		return _sorted_depth_colors[0].color
+
+	if depth <= _sorted_depth_colors[0].depth:
+		return _sorted_depth_colors[0].color
+
+	if depth >= _sorted_depth_colors[-1].depth:
+		return _sorted_depth_colors[-1].color
+
+	for i in range(_sorted_depth_colors.size() - 1):
+		var a = _sorted_depth_colors[i]
+		var b = _sorted_depth_colors[i + 1]
+		if depth >= a.depth and depth <= b.depth:
+			var t = inverse_lerp(a.depth, b.depth, depth)
+			return a.color.lerp(b.color, t)
+
+	return _sorted_depth_colors[-1].color
+
+func _update_depth_color(delta: float) -> void:
+	if not canvas_modulate or _sorted_depth_colors.is_empty():
+		return
+
+	var target_color = _get_target_color_for_depth(_get_current_depth())
+	canvas_modulate.color = canvas_modulate.color.lerp(
+		target_color,
+		clamp(delta * color_transition_speed, 0.0, 1.0)
+	)
 
 func _toggle_grab() -> void:
 	if is_animating:
@@ -140,3 +193,16 @@ func _trigger_horn() -> void:
 			item.reveal()
 		else:
 			items_in_detect_range.erase(item)
+
+func _update_motor_sound(delta: float) -> void:
+	var input_vector = Vector2(
+		Input.get_axis("left", "right"),
+		Input.get_axis("up", "down")
+	)
+	var is_thrusting = input_vector.length() > 0
+
+	if not motor_noise.playing:
+		motor_noise.play(motor_noise.get_playback_position())
+
+	var target_db = motor_volume_db if is_thrusting else motor_silent_db
+	motor_noise.volume_db = lerp(motor_noise.volume_db, target_db, delta * volume_fade_speed)

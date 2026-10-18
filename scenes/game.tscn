@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://d3vg41f8d65rh"]
+
+[ext_resource type="Texture2D" uid="uid://cx33wlxmmhrak" path="res://textures/bg.png" id="1_1ov6r"]
+[ext_resource type="PackedScene" uid="uid://dbhrivwtxuo2h" path="res://scenes/subship.tscn" id="2_e2ll7"]
+[ext_resource type="PackedScene" uid="uid://bcmv6jwnidopj" path="res://scenes/item_printer.tscn" id="4_1ov6r"]
+[ext_resource type="PackedScene" uid="uid://ds8yfl6l4ceip" path="res://scenes/checkpoint.tscn" id="4_y38rh"]
+[ext_resource type="PackedScene" uid="uid://wqb3gf05koxx" path="res://scenes/item_nuria.tscn" id="5_gee14"]
+[ext_resource type="PackedScene" uid="uid://djcmbhm7cneql" path="res://scenes/item_radio.tscn" id="6_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://qte7onljdbr7" path="res://scenes/item_laptop.tscn" id="7_vtaks"]
+[ext_resource type="PackedScene" uid="uid://dbwosbh1mi7rs" path="res://scenes/item_headphones.tscn" id="8_kvpfn"]
+[ext_resource type="AudioStream" uid="uid://bixciqffpsg76" path="res://audio/string1.wav" id="9_dinhu"]
+[ext_resource type="AudioStream" uid="uid://osnbobjwkwxq" path="res://audio/string2.wav" id="10_kvuet"]
+[ext_resource type="AudioStream" uid="uid://d3g3p8udeqrkc" path="res://audio/string3.wav" id="11_trtic"]
+[ext_resource type="AudioStream" uid="uid://dknb3xnfnakcj" path="res://audio/string4.wav" id="12_ir15t"]
+[ext_resource type="Script" uid="uid://b6qa7v2dlqng3" path="res://scenes/bg_notes.gd" id="13_kvuet"]
+[ext_resource type="AudioStream" uid="uid://ckv4wiayp4all" path="res://audio/underwater.wav" id="14_trtic"]
+[ext_resource type="AudioStream" uid="uid://cd6slj021t1yu" path="res://audio/bigsplash.wav" id="15_ir15t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_318gt"]
+size = Vector2(12432, 2580)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_318gt"]
+streams_count = 4
+stream_0/stream = ExtResource("9_dinhu")
+stream_1/stream = ExtResource("10_kvuet")
+stream_2/stream = ExtResource("11_trtic")
+stream_3/stream = ExtResource("12_ir15t")
+
+[node name="Game" type="Node2D" unique_id=212175431]
+
+[node name="Testbg" type="Sprite2D" parent="." unique_id=1180709907]
+z_index = -5
+position = Vector2(888, 6072)
+scale = Vector2(8.796, 7)
+texture = ExtResource("1_1ov6r")
+
+[node name="Checkpoint" parent="." unique_id=210490658 instance=ExtResource("4_y38rh")]
+position = Vector2(560, 1616)
+
+[node name="Checkpoint2" parent="." unique_id=307373770 instance=ExtResource("4_y38rh")]
+position = Vector2(1104, 4736)
+
+[node name="Checkpoint3" parent="." unique_id=1437195902 instance=ExtResource("4_y38rh")]
+position = Vector2(2736, 8256)
+
+[node name="Checkpoint4" parent="." unique_id=813629662 instance=ExtResource("4_y38rh")]
+position = Vector2(-1424, 11968)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1246415337]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1580528113]
+polygon = PackedVector2Array(-3312, 80, -3736, -1096, -1840, -1248, -2112, 584, -1720, 864, -392, 1056, -128, 1176, 160, 1080, 776, 1032, 1176, 960, 976, 1248, 696, 1416, 272, 1632, -104, 2120, -240, 2560, -1224, 3096, -1304, 3240, -1816, 3312, -1592, 3440, -1488, 3712, -1128, 3840, -456, 3864, -80, 3720, -256, 3984, -256, 4208, -616, 4648, -568, 4960, -656, 5096, -664, 5520, -80, 5968, 144, 6672, -8, 7056, 240, 7664, 464, 8680, 1096, 9472, 1144, 9712, 1120, 10064, 1192, 10264, -576, 11392, -1960, 11712, -3064, 12064, -3344, 12224)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1534264945]
+polygon = PackedVector2Array(5120, -416, 5032, -248, 4720, -432, 4472, -792, 4264, 32, 4120, 72, 4080, 184, 3712, 376, 3496, 304, 3344, 360, 3320, 488, 2544, 872, 2456, 1128, 2272, 1232, 1976, 1592, 1896, 1680, 1480, 1808, 1536, 2008, 1856, 2336, 2264, 2792, 2632, 3040, 2752, 3632, 2624, 3824, 2424, 3960, 1520, 4040, 864, 3960, 584, 3880, 600, 4064, 696, 4200, 824, 4392, 1416, 4832, 1496, 4928, 1688, 5200, 1912, 5408, 2016, 5528, 2112, 5696, 2304, 5848, 2384, 5960, 2336, 6000, 2616, 6192, 2656, 6280, 2824, 6344, 2984, 6560, 3064, 6632, 3024, 6784, 2624, 6792, 2632, 6848, 3160, 6936, 3224, 7080, 3344, 7232, 3216, 7472, 3000, 7472, 2664, 7440, 2560, 7488, 3040, 7520, 3024, 7720, 2608, 7656, 2648, 8056, 3056, 8280, 3096, 8432, 3136, 8424, 3120, 8288, 3200, 8160, 3392, 8192, 3344, 8480, 3320, 8560, 3232, 8568, 3208, 8624, 3496, 9360, 3576, 9432, 3568, 9592, 2888, 9928, 2984, 10072, 3344, 10104, 3624, 10392, 1888, 10952, 1384, 11736, 1040, 12464, 936, 12648, 688, 13016, -128, 13688, -432, 13344, -360, 12896, -976, 13360, -1384, 13560, -1792, 13312, -2064, 12912, -1440, 11424, -2984, 12720, -3328, 12384, -3360, 14792, 5120, 14824)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1106017360]
+position = Vector2(256, -1622)
+shape = SubResource("RectangleShape2D_318gt")
+debug_color = Color(0, 0, 0, 0.8)
+
+[node name="Printer" parent="." unique_id=410368887 instance=ExtResource("4_1ov6r")]
+position = Vector2(1896, 1632)
+
+[node name="Nuria" parent="." unique_id=1165861411 instance=ExtResource("5_gee14")]
+position = Vector2(-1136, 3808)
+
+[node name="Radio" parent="." unique_id=1521070371 instance=ExtResource("6_0tnpc")]
+position = Vector2(1536, 3984)
+
+[node name="Laptop" parent="." unique_id=1166015359 instance=ExtResource("7_vtaks")]
+position = Vector2(-1752, 13256)
+
+[node name="Headphones" parent="." unique_id=1584220487 instance=ExtResource("8_kvpfn")]
+position = Vector2(2768, 7616)
+
+[node name="Ship" parent="." unique_id=1365197171 instance=ExtResource("2_e2ll7")]
+
+[node name="BGNotes" type="AudioStreamPlayer" parent="." unique_id=218690611]
+stream = SubResource("AudioStreamRandomizer_318gt")
+volume_db = -20.0
+bus = &"Sad"
+script = ExtResource("13_kvuet")
+
+[node name="underwater" type="AudioStreamPlayer" parent="." unique_id=1781628093]
+stream = ExtResource("14_trtic")
+volume_db = -25.0
+pitch_scale = 0.5
+autoplay = true
+
+[node name="Splash" type="AudioStreamPlayer" parent="." unique_id=1250248232]
+stream = ExtResource("15_ir15t")
+volume_db = -15.0
+autoplay = true

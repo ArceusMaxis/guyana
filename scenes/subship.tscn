@@ -1,19 +1,54 @@
 [gd_scene format=3 uid="uid://dbhrivwtxuo2h"]
 
 [ext_resource type="Script" uid="uid://c7yekw1xoh8a2" path="res://scripts/sub2d.gd" id="1_88klh"]
+[ext_resource type="Script" uid="uid://bsv6dku3dukp4" path="res://scripts/depthpointype.gd" id="2_05pd0"]
 [ext_resource type="Texture2D" uid="uid://c16j0dy5uvypi" path="res://textures/submarine_pipe_long.png" id="2_6k77r"]
 [ext_resource type="Texture2D" uid="uid://c33uhlxhiqqer" path="res://textures/bubble.png" id="2_j33nr"]
 [ext_resource type="Texture2D" uid="uid://dshlob4lhlkqu" path="res://textures/submarine_part_1.png" id="2_mjtt7"]
 [ext_resource type="Texture2D" uid="uid://p0gm7rfk3pai" path="res://textures/submarine_claw_top.png" id="3_qvn8w"]
-[ext_resource type="Texture2D" uid="uid://bdnt0hgdy2mmm" path="res://textures/oldmine.png" id="4_j33nr"]
 [ext_resource type="Texture2D" uid="uid://cxwufvxoyfmtu" path="res://textures/submarine_claw_bottom.png" id="4_y5eat"]
 [ext_resource type="Shader" uid="uid://b7q5h52yx2vtm" path="res://scripts/underwater.gdshader" id="5_l0iaw"]
 [ext_resource type="Shader" uid="uid://b10igr3bwfe23" path="res://scripts/godrays.gdshader" id="6_mjtt7"]
 [ext_resource type="Texture2D" uid="uid://cgtpey7opdnpv" path="res://textures/submarine_part_3.png" id="7_yrtbm"]
+[ext_resource type="Texture2D" uid="uid://rd2l8cf77rao" path="res://textures/printer.png" id="8_brc1a"]
+[ext_resource type="Texture2D" uid="uid://htmrokwfsct7" path="res://textures/headphones.png" id="9_05pd0"]
 [ext_resource type="Texture2D" uid="uid://npym7mnbm0mj" path="res://textures/bubbles.png" id="10_fhyat"]
+[ext_resource type="Texture2D" uid="uid://b5ua3v2rintf0" path="res://textures/Ilustracao_Sem_Titulo.png" id="10_ukkun"]
 [ext_resource type="Texture2D" uid="uid://dwi5yfprygue1" path="res://textures/ui_1.png" id="11_6k77r"]
+[ext_resource type="Texture2D" uid="uid://ccacu0ma2wcrc" path="res://textures/nokiaphone.png" id="11_ae37l"]
 [ext_resource type="FontFile" uid="uid://2tkrtqjfw1wu" path="res://Trattatello-Font.ttf" id="11_y5eat"]
 [ext_resource type="Script" uid="uid://cqoaaalx4a4hy" path="res://scenes/modulate_matcher.gd" id="12_mav5b"]
+[ext_resource type="Texture2D" uid="uid://dhoyf06h4ljnb" path="res://textures/IMG_0253.png" id="12_uaf2l"]
+[ext_resource type="AudioStream" uid="uid://cffxwx8noxpty" path="res://audio/motor.wav" id="20_ukkun"]
+
+[sub_resource type="Resource" id="Resource_trtic"]
+script = ExtResource("2_05pd0")
+color = Color(0, 0.9166665, 1, 1)
+metadata/_custom_type_script = "uid://bsv6dku3dukp4"
+
+[sub_resource type="Resource" id="Resource_u5sy4"]
+script = ExtResource("2_05pd0")
+depth = 2000.0
+color = Color(0.42000002, 1, 0.48766673, 1)
+metadata/_custom_type_script = "uid://bsv6dku3dukp4"
+
+[sub_resource type="Resource" id="Resource_kvpfn"]
+script = ExtResource("2_05pd0")
+depth = 4500.0
+color = Color(0.99, 0.9405, 0, 1)
+metadata/_custom_type_script = "uid://bsv6dku3dukp4"
+
+[sub_resource type="Resource" id="Resource_dinhu"]
+script = ExtResource("2_05pd0")
+depth = 7500.0
+color = Color(0.99, 0.495, 0, 1)
+metadata/_custom_type_script = "uid://bsv6dku3dukp4"
+
+[sub_resource type="Resource" id="Resource_kvuet"]
+script = ExtResource("2_05pd0")
+depth = 10000.0
+color = Color(0.55, 0, 0, 1)
+metadata/_custom_type_script = "uid://bsv6dku3dukp4"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_318gt"]
 radius = 1080.0
@@ -188,6 +223,9 @@ script = ExtResource("1_88klh")
 thrust_speed = 800.0
 max_speed = 200.0
 friction = 0.98
+depth_colors = Array[ExtResource("2_05pd0")]([SubResource("Resource_trtic"), SubResource("Resource_u5sy4"), SubResource("Resource_kvpfn"), SubResource("Resource_dinhu"), SubResource("Resource_kvuet")])
+surface_y = -40.0
+motor_volume_db = -30.0
 
 [node name="DetectArea" type="Area2D" parent="." unique_id=1091210469]
 
@@ -292,8 +330,40 @@ z_index = -1
 position = Vector2(80, 24)
 scale = Vector2(0.5, 0.5)
 
-[node name="oldmine" type="Sprite2D" parent="flipnode/GrabPin" unique_id=1095269812]
-texture = ExtResource("4_j33nr")
+[node name="printer" type="Sprite2D" parent="flipnode/GrabPin" unique_id=509414810]
+visible = false
+clip_children = 2
+position = Vector2(14, -2)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("8_brc1a")
+
+[node name="headphones" type="Sprite2D" parent="flipnode/GrabPin" unique_id=1682065693]
+visible = false
+clip_children = 2
+position = Vector2(12, 1)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("9_05pd0")
+
+[node name="laptop" type="Sprite2D" parent="flipnode/GrabPin" unique_id=1260499678]
+visible = false
+clip_children = 2
+position = Vector2(8, -5)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("10_ukkun")
+
+[node name="nuria" type="Sprite2D" parent="flipnode/GrabPin" unique_id=2138699064]
+visible = false
+clip_children = 2
+position = Vector2(6, 3)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("11_ae37l")
+
+[node name="radio" type="Sprite2D" parent="flipnode/GrabPin" unique_id=2094544990]
+visible = false
+clip_children = 2
+position = Vector2(16, -4)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("12_uaf2l")
 
 [node name="Pipeholder" type="Sprite2D" parent="flipnode" unique_id=1738458247]
 position = Vector2(3.8146973e-06, 1.9073486e-06)
@@ -330,7 +400,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=262899531]
-color = Color(0, 0.9916915, 0.48586094, 1)
+color = Color(0, 0.9166665, 1, 1)
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1389623362]
 
@@ -367,3 +437,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("11_6k77r")
+
+[node name="MotorNoise" type="AudioStreamPlayer" parent="." unique_id=393764747]
+stream = ExtResource("20_ukkun")

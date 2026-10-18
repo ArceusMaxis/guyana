@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ck52x0bdlmfmj"]
 
 [ext_resource type="Script" uid="uid://chokkc13yav4g" path="res://scripts/main_menu.gd" id="1_ekxnf"]
-[ext_resource type="PackedScene" uid="uid://d3vg41f8d65rh" path="res://scenes/test2d.tscn" id="2_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://d3vg41f8d65rh" path="res://scenes/game.tscn" id="2_bqqt6"]
 [ext_resource type="AudioStream" uid="uid://cvfsg6tr7nqkd" path="res://audio/Cryptic Sorrow.mp3" id="3_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://bdonjl5tqdptj" path="res://textures/Screenshot_2026-10-17_at_9.56.17_PM.png" id="3_rtw2f"]
 [ext_resource type="FontFile" uid="uid://2tkrtqjfw1wu" path="res://Trattatello-Font.ttf" id="4_oa1go"]
