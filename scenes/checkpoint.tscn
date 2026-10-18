@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bg1jdi1yy1y18" path="res://scripts/checkpoint.gd" id="1_ywqth"]
 [ext_resource type="Texture2D" uid="uid://ebupill062kg" path="res://textures/checkpoints.png" id="2_vsimk"]
+[ext_resource type="Texture2D" uid="uid://c33uhlxhiqqer" path="res://textures/bubble.png" id="2_yqsag"]
 
 [sub_resource type="Curve" id="Curve_318gt"]
 _limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.6325648, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_318gt"]
@@ -17,8 +18,9 @@ script = ExtResource("1_ywqth")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1487436120]
 position = Vector2(0, 144)
 amount = 16
+texture = ExtResource("2_yqsag")
 emission_shape = 3
-emission_rect_extents = Vector2(48, 1)
+emission_rect_extents = Vector2(48, 30)
 gravity = Vector2(0, -980)
 radial_accel_min = -100.0
 scale_amount_curve = SubResource("Curve_318gt")
@@ -28,5 +30,6 @@ position = Vector2(0, 75)
 shape = SubResource("RectangleShape2D_318gt")
 
 [node name="Checkpoints" type="Sprite2D" parent="." unique_id=423967496]
-position = Vector2(0, -72)
+position = Vector2(-0.9999999, -98.00001)
+scale = Vector2(0.45555556, 0.45555556)
 texture = ExtResource("2_vsimk")

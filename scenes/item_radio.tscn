@@ -24,7 +24,7 @@ size = Vector2(79, 54)
 [node name="Radio" type="Area2D" unique_id=410368887]
 script = ExtResource("1_tqv80")
 item_id = "radio"
-item_value = 100
+item_value = 70
 
 [node name="RevealParticles" type="CPUParticles2D" parent="." unique_id=536076596]
 emitting = false

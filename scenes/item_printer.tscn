@@ -24,7 +24,7 @@ size = Vector2(80, 56)
 [node name="Printer" type="Area2D" unique_id=410368887]
 script = ExtResource("1_b2f0m")
 item_id = "printer"
-item_value = 4000
+item_value = 30
 
 [node name="RevealParticles" type="CPUParticles2D" parent="." unique_id=536076596]
 emitting = false

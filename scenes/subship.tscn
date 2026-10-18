@@ -19,7 +19,11 @@
 [ext_resource type="FontFile" uid="uid://2tkrtqjfw1wu" path="res://Trattatello-Font.ttf" id="11_y5eat"]
 [ext_resource type="Script" uid="uid://cqoaaalx4a4hy" path="res://scenes/modulate_matcher.gd" id="12_mav5b"]
 [ext_resource type="Texture2D" uid="uid://dhoyf06h4ljnb" path="res://textures/IMG_0253.png" id="12_uaf2l"]
+[ext_resource type="Texture2D" uid="uid://beaq7pcwihlpd" path="res://textures/bag_3.png" id="19_a8ydv"]
+[ext_resource type="Texture2D" uid="uid://ojan2obq5vls" path="res://textures/bag_2.png" id="20_oej8p"]
 [ext_resource type="AudioStream" uid="uid://cffxwx8noxpty" path="res://audio/motor.wav" id="20_ukkun"]
+[ext_resource type="Texture2D" uid="uid://vboh4vjnmfhj" path="res://textures/bag_1.png" id="21_vopun"]
+[ext_resource type="AudioStream" uid="uid://bdksqsfgh6n1r" path="res://audio/horn.wav" id="24_oej8p"]
 
 [sub_resource type="Resource" id="Resource_trtic"]
 script = ExtResource("2_05pd0")
@@ -217,6 +221,11 @@ shader_parameter/caustic_speed = 0.5
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y5eat"]
 light_mode = 1
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_318gt"]
+random_pitch = 1.0116194
+streams_count = 1
+stream_0/stream = ExtResource("24_oej8p")
+
 [node name="Ship" type="CharacterBody2D" unique_id=1365197171 groups=["player"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_88klh")
@@ -412,6 +421,7 @@ offset_right = 960.0
 offset_bottom = 544.0
 scale = Vector2(2, 2)
 script = ExtResource("12_mav5b")
+jump_duration = 0.2
 
 [node name="Coinlabel" type="Label" parent="CanvasLayer2/Control" unique_id=850107245]
 unique_name_in_owner = true
@@ -420,15 +430,43 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -128.0
+offset_left = -132.0
 offset_top = 16.0
 offset_right = -32.0
-offset_bottom = 40.0
+offset_bottom = 84.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("11_y5eat")
 theme_override_font_sizes/font_size = 37
 text = "Coins: 0"
 horizontal_alignment = 2
+
+[node name="Pouch" type="Control" parent="CanvasLayer2/Control/Coinlabel" unique_id=568116362]
+anchors_preset = 0
+offset_left = -56.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 52.0
+pivot_offset = Vector2(20, 20)
+
+[node name="Bag3" type="TextureRect" parent="CanvasLayer2/Control/Coinlabel/Pouch" unique_id=193295161]
+visible = false
+layout_mode = 0
+offset_right = 39.0
+offset_bottom = 39.0
+texture = ExtResource("19_a8ydv")
+
+[node name="Bag2" type="TextureRect" parent="CanvasLayer2/Control/Coinlabel/Pouch" unique_id=1668291841]
+visible = false
+layout_mode = 0
+offset_right = 39.0
+offset_bottom = 39.0
+texture = ExtResource("20_oej8p")
+
+[node name="Bag1" type="TextureRect" parent="CanvasLayer2/Control/Coinlabel/Pouch" unique_id=2037505267]
+layout_mode = 0
+offset_right = 39.0
+offset_bottom = 39.0
+texture = ExtResource("21_vopun")
 
 [node name="ControlsInfo" type="TextureRect" parent="CanvasLayer2/Control" unique_id=1580128274]
 unique_name_in_owner = true
@@ -440,3 +478,7 @@ texture = ExtResource("11_6k77r")
 
 [node name="MotorNoise" type="AudioStreamPlayer" parent="." unique_id=393764747]
 stream = ExtResource("20_ukkun")
+
+[node name="HornSFX" type="AudioStreamPlayer" parent="." unique_id=802179193]
+stream = SubResource("AudioStreamRandomizer_318gt")
+volume_db = -10.0

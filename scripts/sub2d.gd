@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@export var coins : int = 0
+signal coins_changed(new_amount: int)
+
+@export var coins: int = 0
 
 @export var thrust_speed: float = 1200.0
 @export var max_speed: float = 400.0
@@ -14,6 +16,8 @@ extends CharacterBody2D
 @export var motor_silent_db: float = -40.0
 @export var volume_fade_speed: float = 5.0
 
+
+@onready var horn_sfx: AudioStreamPlayer = $"../../HornSFX"
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var grab_area: Area2D = $flipnode/GrabArea
 @onready var grab_pin: Marker2D = $flipnode/GrabPin
@@ -29,10 +33,11 @@ extends CharacterBody2D
 var nearby_items: Array[Area2D] = []
 var grabbed_item: Area2D = null
 var is_animating: bool = false
-
 var items_in_detect_range: Array[Area2D] = []
-
 var _sorted_depth_colors: Array[DepthColorPoint] = []
+
+func _enter_tree() -> void:
+	add_to_group("player")
 
 func _ready() -> void:
 	grab_area.area_entered.connect(_on_grab_area_entered)
@@ -47,14 +52,16 @@ func _ready() -> void:
 	_sorted_depth_colors = depth_colors.duplicate()
 	_sorted_depth_colors.sort_custom(func(a, b): return a.depth < b.depth)
 
-	await get_tree().create_timer(25).timeout
+	await get_tree().create_timer(25.0).timeout
 	controls_info.visible = false
 
 func _physics_process(delta: float) -> void:
 	coinlabel.text = "Coins: " + str(coins)
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_axis("left", "right")
-	input_vector.y = Input.get_axis("up", "down")
+
+	var input_vector := Vector2(
+		Input.get_axis("left", "right"),
+		Input.get_axis("up", "down")
+	)
 
 	if not is_animating:
 		if input_vector.length() > 0:
@@ -71,7 +78,10 @@ func _physics_process(delta: float) -> void:
 				flipnode.scale.x = -1
 				colli.position.x = 8
 		else:
-			velocity = velocity.lerp(Vector2.ZERO, 1.0 - pow(friction, delta * 60))
+			velocity = velocity.lerp(
+				Vector2.ZERO,
+				1.0 - pow(friction, delta * 60.0)
+			)
 
 	if Input.is_action_just_pressed("grab"):
 		_toggle_grab()
@@ -80,9 +90,32 @@ func _physics_process(delta: float) -> void:
 		_trigger_horn()
 
 	_update_depth_color(delta)
-
 	move_and_slide()
 	_update_motor_sound(delta)
+
+func add_coins(amount: int) -> void:
+	if amount == 0:
+		return
+
+	coins += amount
+	coins_changed.emit(coins)
+
+func sell_item(item: Item) -> void:
+	if not is_instance_valid(item) or item.is_queued_for_deletion():
+		return
+
+	var item_value: int = item.item_value
+
+	nearby_items.erase(item)
+	items_in_detect_range.erase(item)
+
+	if grabbed_item == item:
+		grabbed_item = null
+		for child in grab_pin.get_children():
+			child.visible = false
+
+	item.queue_free()
+	add_coins(item_value)
 
 func _get_current_depth() -> float:
 	return max(0.0, global_position.y - surface_y)
@@ -103,8 +136,9 @@ func _get_target_color_for_depth(depth: float) -> Color:
 	for i in range(_sorted_depth_colors.size() - 1):
 		var a = _sorted_depth_colors[i]
 		var b = _sorted_depth_colors[i + 1]
+
 		if depth >= a.depth and depth <= b.depth:
-			var t = inverse_lerp(a.depth, b.depth, depth)
+			var t := inverse_lerp(a.depth, b.depth, depth)
 			return a.color.lerp(b.color, t)
 
 	return _sorted_depth_colors[-1].color
@@ -113,7 +147,7 @@ func _update_depth_color(delta: float) -> void:
 	if not canvas_modulate or _sorted_depth_colors.is_empty():
 		return
 
-	var target_color = _get_target_color_for_depth(_get_current_depth())
+	var target_color := _get_target_color_for_depth(_get_current_depth())
 	canvas_modulate.color = canvas_modulate.color.lerp(
 		target_color,
 		clamp(delta * color_transition_speed, 0.0, 1.0)
@@ -139,7 +173,7 @@ func _grab_item(item: Area2D) -> void:
 	item.hide_item()
 
 	for child in grab_pin.get_children():
-		child.visible = (child.name == item.item_id)
+		child.visible = child.name == item.item_id
 
 func _release_item() -> void:
 	if not grabbed_item:
@@ -164,22 +198,6 @@ func _on_grab_area_entered(area: Area2D) -> void:
 func _on_grab_area_exited(area: Area2D) -> void:
 	nearby_items.erase(area)
 
-func sell_grabbed_item() -> void:
-	if not grabbed_item or is_animating:
-		return
-
-	is_animating = true
-	claw_anim.play("drop")
-	await claw_anim.animation_finished
-	is_animating = false
-
-	coins += grabbed_item.item_value
-	grabbed_item.queue_free()
-	grabbed_item = null
-
-	for child in grab_pin.get_children():
-		child.visible = false
-
 func _on_detect_area_entered(area: Area2D) -> void:
 	if area is Item and not items_in_detect_range.has(area):
 		items_in_detect_range.append(area)
@@ -188,6 +206,7 @@ func _on_detect_area_exited(area: Area2D) -> void:
 	items_in_detect_range.erase(area)
 
 func _trigger_horn() -> void:
+	horn_sfx.play()
 	for item in items_in_detect_range.duplicate():
 		if is_instance_valid(item) and item.has_method("reveal"):
 			item.reveal()
@@ -195,14 +214,18 @@ func _trigger_horn() -> void:
 			items_in_detect_range.erase(item)
 
 func _update_motor_sound(delta: float) -> void:
-	var input_vector = Vector2(
+	var input_vector := Vector2(
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
 	)
-	var is_thrusting = input_vector.length() > 0
+	var is_thrusting := input_vector.length() > 0
 
 	if not motor_noise.playing:
 		motor_noise.play(motor_noise.get_playback_position())
 
-	var target_db = motor_volume_db if is_thrusting else motor_silent_db
-	motor_noise.volume_db = lerp(motor_noise.volume_db, target_db, delta * volume_fade_speed)
+	var target_db := motor_volume_db if is_thrusting else motor_silent_db
+	motor_noise.volume_db = lerp(
+		motor_noise.volume_db,
+		target_db,
+		delta * volume_fade_speed
+	)

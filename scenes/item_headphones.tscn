@@ -24,7 +24,7 @@ radius = 25.298222
 [node name="Headphones" type="Area2D" unique_id=410368887]
 script = ExtResource("1_r0d0q")
 item_id = "headphones"
-item_value = 100
+item_value = 10
 
 [node name="RevealParticles" type="CPUParticles2D" parent="." unique_id=536076596]
 emitting = false

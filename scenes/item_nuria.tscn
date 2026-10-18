@@ -24,7 +24,7 @@ size = Vector2(56, 64)
 [node name="Nuria" type="Area2D" unique_id=410368887]
 script = ExtResource("1_ghjbb")
 item_id = "nuria"
-item_value = 600
+item_value = 15
 
 [node name="RevealParticles" type="CPUParticles2D" parent="." unique_id=536076596]
 emitting = false
