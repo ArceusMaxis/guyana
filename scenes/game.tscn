@@ -160,7 +160,7 @@ position = Vector2(1536, 3984)
 position = Vector2(-1752, 13256)
 
 [node name="Headphones" parent="." unique_id=1584220487 instance=ExtResource("8_kvpfn")]
-position = Vector2(2768, 7616)
+position = Vector2(2637, 7623)
 
 [node name="Ship" parent="." unique_id=1365197171 instance=ExtResource("2_e2ll7")]
 
@@ -186,21 +186,3 @@ z_index = 3
 position = Vector2(901.5002, 12148.498)
 scale = Vector2(0.9985649, 0.78088623)
 texture = ExtResource("16_ca42v")
-
-[node name="Headphones2" parent="." unique_id=188724098 instance=ExtResource("8_kvpfn")]
-position = Vector2(1000, 403)
-
-[node name="Laptop2" parent="." unique_id=622333772 instance=ExtResource("7_vtaks")]
-position = Vector2(1098, 396)
-
-[node name="Nuria2" parent="." unique_id=90888343 instance=ExtResource("5_gee14")]
-position = Vector2(1201, 404)
-
-[node name="Printer2" parent="." unique_id=1666370301 instance=ExtResource("4_1ov6r")]
-position = Vector2(1351, 464)
-
-[node name="Radio2" parent="." unique_id=392638829 instance=ExtResource("6_0tnpc")]
-position = Vector2(1352, 371)
-
-[node name="Checkpoint5" parent="." unique_id=1685175932 instance=ExtResource("4_y38rh")]
-position = Vector2(1663, 355)
