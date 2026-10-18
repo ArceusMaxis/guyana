@@ -13,7 +13,9 @@ config_version=5
 config/name="OldTech"
 run/main_scene="uid://ck52x0bdlmfmj"
 config/features=PackedStringArray("4.7")
-config/icon="res://icon.svg"
+config/icon="uid://babg4dgdqjbhk"
+config/macos_native_icon="res://icon.icns"
+config/windows_native_icon="res://icon.ico"
 
 [audio]
 

@@ -3,16 +3,20 @@
 [ext_resource type="Script" uid="uid://chokkc13yav4g" path="res://scripts/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://d3vg41f8d65rh" path="res://scenes/game.tscn" id="2_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://bdonjl5tqdptj" path="res://textures/Screenshot_2026-10-17_at_9.56.17_PM.png" id="3_rtw2f"]
-[ext_resource type="FontFile" uid="uid://2tkrtqjfw1wu" path="res://Trattatello-Font.ttf" id="4_oa1go"]
 [ext_resource type="FontFile" uid="uid://cussd4ngnyl7a" path="res://Verdana Regular.ttf" id="5_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://cgtg8i3ohbvtk" path="res://textures/credits_no_magnets.png" id="6_1ajci"]
 [ext_resource type="AudioStream" uid="uid://b2sym7wlxmmjc" path="res://audio/somethign.mp3" id="6_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://bn7fe63xh7fk0" path="res://textures/chaakravue.png" id="7_7b55j"]
 [ext_resource type="Shader" uid="uid://b7q5h52yx2vtm" path="res://scripts/underwater.gdshader" id="7_oa1go"]
+[ext_resource type="Texture2D" uid="uid://mes7gd87q1nf" path="res://textures/helena.png" id="8_5pajh"]
 [ext_resource type="Texture2D" uid="uid://npym7mnbm0mj" path="res://textures/bubbles.png" id="8_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://chnpilx3rq23b" path="res://textures/kureca_magnet.png" id="9_j7ex8"]
+[ext_resource type="Texture2D" uid="uid://dukkrvr5yx6c1" path="res://textures/surface_value_logo.png" id="9_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://do23k54ytgyxo" path="res://textures/magda.png" id="10_a8gd2"]
+[ext_resource type="Texture2D" uid="uid://djrycefmix2dt" path="res://textures/mikko.png" id="11_hstxw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wbad"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_318gt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("7_oa1go")
@@ -37,29 +41,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ekxnf")
 next_scene = ExtResource("2_bqqt6")
+chaakravue_url = "https://arceusmaxis.github.io/portfolio/"
 
 [node name="Screenshot20261017At9_56_17Pm" type="Sprite2D" parent="." unique_id=1800221713]
 position = Vector2(959.99994, 540)
 scale = Vector2(2, 2)
 texture = ExtResource("3_rtw2f")
-
-[node name="Label" type="Label" parent="." unique_id=2052023993]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -757.0
-offset_top = -500.0
-offset_right = 74.0
-offset_bottom = -216.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 156
-text = "game title"
-uppercase = true
 
 [node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=258625718]
 layout_mode = 1
@@ -67,10 +54,10 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 192.0
-offset_top = -812.0
-offset_right = -1464.0
-offset_bottom = -516.0
+offset_left = 236.0
+offset_top = -632.0
+offset_right = -1420.0
+offset_bottom = -336.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 4
@@ -123,8 +110,14 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_3wbad")
 text = "Quit"
 alignment = 0
 
+[node name="SurfaceValueLogo" type="Sprite2D" parent="." unique_id=2027436021]
+position = Vector2(636, 299)
+scale = Vector2(2, 2)
+texture = ExtResource("9_jk1qb")
+
 [node name="Credits" type="Control" parent="." unique_id=1223475019]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,30 +125,60 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Credits" unique_id=1072096688]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.19076231, 0.19076234, 0.19076231, 1)
+[node name="CreditsNoMagnets" type="Sprite2D" parent="Credits" unique_id=274035997]
+position = Vector2(960, 540)
+scale = Vector2(2, 2)
+texture = ExtResource("6_1ajci")
 
-[node name="Label" type="Label" parent="Credits" unique_id=1487946771]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -272.0
-offset_top = 72.0
-offset_right = 277.0
-offset_bottom = 281.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 153
-text = "Credits"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Chaakravue" type="TextureRect" parent="Credits" unique_id=310825863]
+layout_mode = 0
+offset_left = 301.0
+offset_top = 367.0
+offset_right = 452.0
+offset_bottom = 532.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(75, 82)
+texture = ExtResource("7_7b55j")
+
+[node name="Helena" type="TextureRect" parent="Credits" unique_id=801042102]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 272.0
+offset_right = 678.0
+offset_bottom = 399.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(63, 63)
+texture = ExtResource("8_5pajh")
+
+[node name="KurecaMagnet" type="TextureRect" parent="Credits" unique_id=1482757722]
+layout_mode = 0
+offset_left = 904.0
+offset_top = 472.0
+offset_right = 1049.0
+offset_bottom = 616.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(72, 72)
+texture = ExtResource("9_j7ex8")
+
+[node name="Magda" type="TextureRect" parent="Credits" unique_id=1150585894]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 560.0
+offset_right = 762.0
+offset_bottom = 704.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(61, 72)
+texture = ExtResource("10_a8gd2")
+
+[node name="Mikko" type="TextureRect" parent="Credits" unique_id=1330889147]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 200.0
+offset_right = 915.0
+offset_bottom = 325.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(57, 62)
+texture = ExtResource("11_hstxw")
 
 [node name="backbutton" type="Button" parent="Credits" unique_id=1687898835]
 unique_name_in_owner = true
@@ -165,10 +188,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = -144.0
-offset_right = 81.0
-offset_bottom = -61.0
+offset_left = 720.0
+offset_top = -152.0
+offset_right = 881.0
+offset_bottom = -69.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.6901961, 0.6901961, 0.6901961, 1)
@@ -183,218 +206,6 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_3wbad")
 theme_override_styles/focus = SubResource("StyleBoxFlat_3wbad")
 text = "Back"
 alignment = 0
-
-[node name="HBoxContainer" type="GridContainer" parent="Credits" unique_id=680090170]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -622.0
-offset_top = -224.0
-offset_right = 622.0
-offset_bottom = 224.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/h_separation = 238
-theme_override_constants/v_separation = 70
-columns = 3
-
-[node name="Label2" type="Label" parent="Credits/HBoxContainer" unique_id=1513909823]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 110
-text = "Chaak"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="Credits/HBoxContainer/Label2" unique_id=620657856]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -128.5
-offset_top = -15.5
-offset_right = 128.5
-offset_bottom = 48.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_tbmy8")
-theme_override_font_sizes/font_size = 39
-text = "Programming & SFX"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="Credits/HBoxContainer" unique_id=1776740938]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 110
-text = "Mikko"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="Credits/HBoxContainer/Label3" unique_id=8202778]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -128.5
-offset_top = -15.5
-offset_right = 128.5
-offset_bottom = 48.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_tbmy8")
-theme_override_font_sizes/font_size = 39
-text = "Art & UI"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label4" type="Label" parent="Credits/HBoxContainer" unique_id=1977754884]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 110
-text = "Lena"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="Credits/HBoxContainer/Label4" unique_id=2002487395]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -128.5
-offset_top = -15.5
-offset_right = 128.5
-offset_bottom = 48.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_tbmy8")
-theme_override_font_sizes/font_size = 39
-text = "Art"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label5" type="Label" parent="Credits/HBoxContainer" unique_id=1014537706]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 110
-text = "Magda"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="Credits/HBoxContainer/Label5" unique_id=224170119]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -128.5
-offset_top = -15.5
-offset_right = 128.5
-offset_bottom = 48.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_tbmy8")
-theme_override_font_sizes/font_size = 39
-text = "Art"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label6" type="Label" parent="Credits/HBoxContainer" unique_id=217231111]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 110
-text = "Kureca"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="Credits/HBoxContainer/Label6" unique_id=1540747785]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -128.5
-offset_top = -15.5
-offset_right = 128.5
-offset_bottom = 48.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("5_tbmy8")
-theme_override_font_sizes/font_size = 39
-text = "Music"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ChaakButton" type="Button" parent="Credits" unique_id=135595965]
-layout_mode = 0
-offset_left = 320.0
-offset_top = 312.0
-offset_right = 624.0
-offset_bottom = 456.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_318gt")
-
-[node name="MikkoButton" type="Button" parent="Credits" unique_id=168788121]
-layout_mode = 0
-offset_left = 808.0
-offset_top = 320.0
-offset_right = 1112.0
-offset_bottom = 464.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_318gt")
-
-[node name="LenaButton" type="Button" parent="Credits" unique_id=1459053435]
-layout_mode = 0
-offset_left = 1264.0
-offset_top = 328.0
-offset_right = 1568.0
-offset_bottom = 472.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_318gt")
-
-[node name="MagdaButton" type="Button" parent="Credits" unique_id=1534053144]
-layout_mode = 0
-offset_left = 320.0
-offset_top = 600.0
-offset_right = 624.0
-offset_bottom = 744.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_318gt")
-
-[node name="KurecaButton" type="Button" parent="Credits" unique_id=542850557]
-layout_mode = 0
-offset_left = 808.0
-offset_top = 600.0
-offset_right = 1112.0
-offset_bottom = 744.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_318gt")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_318gt")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=860908379]
 stream = ExtResource("6_tbmy8")
